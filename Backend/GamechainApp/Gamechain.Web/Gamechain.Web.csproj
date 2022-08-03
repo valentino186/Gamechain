@@ -14,4 +14,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Gamechain.Application.Contracts\Gamechain.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Gamechain.Infrastructure\Gamechain.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
