@@ -1,6 +1,6 @@
 ﻿using Gamechain.Domain.Entities.Common;
 
-namespace Gamechain.Domain.Entities.Aggregates.GenreAggregate
+namespace Gamechain.Domain.Entities.Aggregates.Genre
 {
     public class Genre : AggregateRoot
     {

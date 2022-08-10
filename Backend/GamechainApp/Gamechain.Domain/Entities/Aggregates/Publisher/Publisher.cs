@@ -1,6 +1,6 @@
 ﻿using Gamechain.Domain.Entities.Common;
 
-namespace Gamechain.Domain.Entities.Aggregates.PublisherAggregate
+namespace Gamechain.Domain.Entities.Aggregates.Publisher
 {
     public class Publisher : AggregateRoot
     {
