@@ -1,6 +1,6 @@
 ﻿using Gamechain.Domain.Entities.Common;
 
-namespace Gamechain.Domain.Entities.Aggregates.Publisher
+namespace Gamechain.Domain.Entities.Aggregates.Game
 {
     public class GamePlatform : Entity
     {

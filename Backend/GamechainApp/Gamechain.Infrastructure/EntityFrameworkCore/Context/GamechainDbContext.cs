@@ -1,4 +1,5 @@
 ﻿using Gamechain.Domain.Entities.Aggregates.Feature;
+using Gamechain.Domain.Entities.Aggregates.Game;
 using Gamechain.Domain.Entities.Aggregates.Genre;
 using Gamechain.Domain.Entities.Aggregates.Platform;
 using Gamechain.Domain.Entities.Aggregates.Publisher;

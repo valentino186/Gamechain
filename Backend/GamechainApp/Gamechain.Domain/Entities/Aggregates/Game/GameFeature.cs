@@ -1,4 +1,4 @@
-﻿namespace Gamechain.Domain.Entities.Aggregates.Publisher
+﻿namespace Gamechain.Domain.Entities.Aggregates.Game
 {
     public class GameFeature
     {

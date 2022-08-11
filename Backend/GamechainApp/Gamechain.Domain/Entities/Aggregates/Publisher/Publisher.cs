@@ -5,12 +5,10 @@ namespace Gamechain.Domain.Entities.Aggregates.Publisher
     public class Publisher : AggregateRoot
     {
         public string Name { get; set; }
-        public IList<Game> Games { get; set; }
 
         public Publisher(string name)
         {
             Name = name;
-            Games = new List<Game>();
         }
 
         public Publisher(Guid id, string name): this(name)
