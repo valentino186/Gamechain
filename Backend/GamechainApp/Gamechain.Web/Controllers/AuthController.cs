@@ -1,5 +1,6 @@
-﻿using Gamechain.Application.Contracts.Dtos.Auth;
+﻿using Gamechain.Application.Contracts.Common.Responses;
 using Gamechain.Application.Contracts.Interfaces.AppServices;
+using Gamechain.Application.Contracts.Requests.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gamechain.Web.Controllers
@@ -17,9 +18,9 @@ namespace Gamechain.Web.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public Task<string> Login([FromBody] LoginDto loginDto)
+        public Task<LoginResponse> Login([FromBody] LoginRequest loginRequest)
         {
-            return _authAppService.Login(loginDto);
+            return _authAppService.Login(loginRequest);
         }
     }
 }

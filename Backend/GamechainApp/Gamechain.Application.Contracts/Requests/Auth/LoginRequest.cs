@@ -1,6 +1,6 @@
-﻿namespace Gamechain.Application.Contracts.Dtos.Auth
+﻿namespace Gamechain.Application.Contracts.Requests.Auth
 {
-    public class LoginDto
+    public class LoginRequest
     {
         public string UserName { get; set; }
         public string Password { get; set; }

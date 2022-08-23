@@ -10,7 +10,7 @@
                     <q-separator inset />
 
                     <q-card-section>
-                        <q-input v-model="loginModel.userName" outlined label="Username" class="q-mb-md">
+                        <q-input v-model="loginRequest.userName" outlined label="Username" class="q-mb-md">
                             <template v-slot:prepend>
                                 <q-icon name="person" color="indigo-6" />
                             </template>
@@ -19,7 +19,7 @@
                             </template>
                         </q-input>
 
-                        <q-input v-model="loginModel.password" outlined :type="showPassword ? 'text' : 'password'">
+                        <q-input v-model="loginRequest.password" outlined label="Password" :type="showPassword ? 'text' : 'password'">
                             <template v-slot:prepend>
                                 <q-icon name="key" color="indigo-6" />
                             </template>
@@ -37,7 +37,7 @@
                     <q-separator inset />
 
                     <q-card-section>
-                        <q-btn class="full-width" color="indigo-8" label="Login" />
+                        <q-btn @click="handleLoginBtnClick" class="full-width" color="indigo-8" label="Login" />
                     </q-card-section>
                 </q-card>
             </q-page>
@@ -46,20 +46,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { useAuthService } from 'src/shared/core/services/auth.service';
+import { LoginRequest } from 'src/shared/infrastructure/models/requests/auth/login-request.model';
+import { defineComponent, reactive, ref } from 'vue';
 
 export default defineComponent({
     setup() {
         const showPassword = ref<boolean>(false);
 
-        const loginModel = {
+        const loginRequest = reactive<LoginRequest>({
             userName: '',
             password: ''
+        });
+
+        const authService = useAuthService();
+
+        function handleLoginBtnClick() {
+            authService.login(loginRequest);
         }
 
         return {
-            loginModel,
-            showPassword
+            loginRequest,
+            showPassword,
+            handleLoginBtnClick
         }
     }
 })
