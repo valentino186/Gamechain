@@ -1,4 +1,5 @@
-﻿using Gamechain.Domain.Entities.Aggregates.Wishlist;
+﻿using Gamechain.Domain.Entities.Aggregates.User;
+using Gamechain.Domain.Entities.Aggregates.Wishlist;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,6 +12,10 @@ namespace Gamechain.Infrastructure.EntityFrameworkCore.Configurations
             builder.ToTable("Wishlists");
 
             builder.HasKey(x => x.Id);
+
+            builder.HasOne<ApplicationUser>()
+                .WithOne()
+                .HasForeignKey<Wishlist>(x => x.UserId);
         }
     }
 }
