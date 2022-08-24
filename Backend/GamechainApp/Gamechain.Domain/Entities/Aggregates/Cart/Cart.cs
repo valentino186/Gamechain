@@ -1,8 +1,8 @@
 ﻿using Gamechain.Domain.Entities.Common;
 
-namespace Gamechain.Domain.Entities.Aggregates.User
+namespace Gamechain.Domain.Entities.Aggregates.Cart
 {
-    public class Cart : Entity
+    public class Cart : AggregateRoot
     {
         public Guid UserId { get; set; }
         public IList<GameCart> Games { get; set; }
@@ -10,6 +10,7 @@ namespace Gamechain.Domain.Entities.Aggregates.User
         public Cart(Guid userId)
         {
             UserId = userId;
+
             Games = new List<GameCart>();
         }
 

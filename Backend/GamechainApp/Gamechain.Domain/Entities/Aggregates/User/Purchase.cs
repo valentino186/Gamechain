@@ -8,6 +8,6 @@ namespace Gamechain.Domain.Entities.Aggregates.User
         public Guid GameId { get; set; }
 
         public DateTime PurchaseDate { get; set; }
-        public DateTime RefundDate { get; set; }
+        public DateTime? RefundDate { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Gamechain.Domain.Entities.Common;
 
-namespace Gamechain.Domain.Entities.Aggregates.User
+namespace Gamechain.Domain.Entities.Aggregates.Cart
 {
     public class GameCart : Entity
     {

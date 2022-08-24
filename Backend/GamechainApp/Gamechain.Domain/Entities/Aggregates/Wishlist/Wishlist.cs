@@ -1,8 +1,8 @@
 ﻿using Gamechain.Domain.Entities.Common;
 
-namespace Gamechain.Domain.Entities.Aggregates.User
+namespace Gamechain.Domain.Entities.Aggregates.Wishlist
 {
-    public class Wishlist : Entity
+    public class Wishlist : AggregateRoot
     {
         public Guid UserId { get; set; }
         public IList<GameWishlist> Games { get; set; }

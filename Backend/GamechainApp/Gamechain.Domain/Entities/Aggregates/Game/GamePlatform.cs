@@ -2,7 +2,7 @@
 
 namespace Gamechain.Domain.Entities.Aggregates.Game
 {
-    public class GamePlatform : Entity
+    public class GamePlatform
     {
         public Guid GameId { get; set; }
         public Guid PlatformId { get; set; }
