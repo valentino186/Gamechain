@@ -48,7 +48,7 @@ builder.Services.AddDbContext<GamechainDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(GamechainDbContext)));
 });
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<GamechainDbContext>();
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<GamechainDbContext>();
 
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 

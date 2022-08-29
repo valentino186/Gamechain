@@ -6,14 +6,13 @@ using Gamechain.Domain.Entities.Aggregates.Platform;
 using Gamechain.Domain.Entities.Aggregates.Publisher;
 using Gamechain.Domain.Entities.Aggregates.User;
 using Gamechain.Domain.Entities.Aggregates.Wishlist;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Gamechain.Infrastructure.EntityFrameworkCore.Context
 {
-    public class GamechainDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+    public class GamechainDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Cart> Carts { get; set; }
@@ -37,6 +36,8 @@ namespace Gamechain.Infrastructure.EntityFrameworkCore.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.SeedInitialData();
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }

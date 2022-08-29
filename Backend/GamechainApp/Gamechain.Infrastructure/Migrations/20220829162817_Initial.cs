@@ -424,6 +424,21 @@ namespace Gamechain.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { new Guid("f2148693-2816-475e-8ad4-0bb2c4df685e"), "2a426efc-53ba-4ea7-9e4a-984131f46327", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("53bfb232-5070-4fcb-ba00-4ed5df35f6ff"), 0, "00d2fa7a-e8ad-49c3-b820-4d0c05e2b3fa", null, false, "admin", "admin", false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEDbPRr8tzi6GM4HjmbkMZzAmIEQt9wj0VFNNmGr0WJOiYtRClJv9GN2XZ6AuwRtZ1A==", null, false, null, false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { new Guid("f2148693-2816-475e-8ad4-0bb2c4df685e"), new Guid("53bfb232-5070-4fcb-ba00-4ed5df35f6ff") });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
