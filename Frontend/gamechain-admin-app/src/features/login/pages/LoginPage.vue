@@ -37,7 +37,7 @@
                     <q-separator inset />
 
                     <q-card-section>
-                        <q-btn @click="handleLoginBtnClick" class="full-width" color="indigo-8" label="Login" />
+                        <q-btn @click="handleLoginBtnClick" :loading="state.loading" class="full-width" color="indigo-8" label="Login" />
                     </q-card-section>
                 </q-card>
             </q-page>
@@ -46,9 +46,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, reactive, ref } from 'vue';
+import { useAuthStore } from 'src/stores/auth.store';
 import { useAuthService } from 'src/shared/core/services/auth.service';
 import { LoginRequest } from 'src/shared/infrastructure/models/requests/auth/login-request.model';
-import { defineComponent, reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
     setup() {
@@ -60,12 +62,18 @@ export default defineComponent({
         });
 
         const authService = useAuthService();
+        const { state } = useAuthStore();
+        const router = useRouter();
 
-        function handleLoginBtnClick() {
-            authService.login(loginRequest);
+        async function handleLoginBtnClick() {
+            await authService.login(loginRequest);
+
+            if (state.token)
+                router.push({ path: '/app/publishers' })
         }
 
         return {
+            state,
             loginRequest,
             showPassword,
             handleLoginBtnClick

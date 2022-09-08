@@ -30,7 +30,7 @@ namespace Gamechain.Infrastructure.Repositories
                     {
                         new Claim(ClaimTypes.Name, user.UserName)
                     }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddMinutes(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };
 

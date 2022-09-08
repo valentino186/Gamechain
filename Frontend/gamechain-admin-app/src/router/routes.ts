@@ -1,17 +1,14 @@
 import { RouteRecordRaw } from "vue-router";
 import MainLayout from "layouts/MainLayout.vue";
-import PublishersPage from "src/modules/publisher/pages/PublishersPage.vue";
-import LoginPage from "src/modules/login/pages/LoginPage.vue";
+import PublishersPage from "src/features/publisher/pages/PublishersPage.vue";
+import { loginRoutes } from "src/features/login/login.routes";
 
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    redirect: "/login",
+    redirect: "/app/publishers",
   },
-  {
-    path: "/login",
-    component: LoginPage
-  },
+  ...loginRoutes,
   {
     path: "/app",
     component: MainLayout,
@@ -21,6 +18,9 @@ const routes: RouteRecordRaw[] = [
         component: PublishersPage,
       }
     ],
+    meta: {
+      requiresAuth: true
+    }
   },
 ];
 
