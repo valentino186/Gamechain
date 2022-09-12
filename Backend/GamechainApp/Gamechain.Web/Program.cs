@@ -59,7 +59,9 @@ builder.Services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>()
 
 builder.Services.AddTransient<IAuthAppService, AuthAppService>();
 
+builder.Services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient<IAuthRepository, AuthRepository>();
+builder.Services.AddTransient<IPublisherRepository, PublisherRepository>();
 
 var app = builder.Build();
 

@@ -1,6 +1,6 @@
 ﻿namespace Gamechain.Domain.Entities.Common
 {
-    public class AggregateRoot
+    public abstract class AggregateRoot
     {
         public Guid Id { get; set; }
     }

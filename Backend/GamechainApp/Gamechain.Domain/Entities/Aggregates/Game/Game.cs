@@ -2,7 +2,7 @@
 
 namespace Gamechain.Domain.Entities.Aggregates.Game
 {
-    public class Game : Entity
+    public class Game : AggregateRoot
     {
         public Guid PublisherId { get; set; }
         public string Name { get; set; }
