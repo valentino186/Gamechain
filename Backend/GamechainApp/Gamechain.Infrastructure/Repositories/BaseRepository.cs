@@ -25,5 +25,14 @@ namespace Gamechain.Infrastructure.Repositories
         {
             return _dbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task<T> Create(T entity)
+        {
+            _dbSet.Add(entity);
+
+            await _context.SaveChangesAsync();
+
+            return entity;
+        }
     }
 }

@@ -12,6 +12,7 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "pinia": "^2.0.11",
+    "pinia-orm": "^1.0.0-rc.6",
     "pinia-plugin-persistedstate": "^2.1.1",
     "quasar": "^2.6.0",
     "vue": "^3.0.0",

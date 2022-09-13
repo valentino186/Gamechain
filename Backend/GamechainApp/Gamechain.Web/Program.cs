@@ -2,9 +2,12 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Gamechain.Application.AppServices.Auth;
 using Gamechain.Application.AppServices.Auth.Validators;
+using Gamechain.Application.AppServices.Publishers;
+using Gamechain.Application.AppServices.Publishers.Validators;
 using Gamechain.Application.Contracts.Interfaces.AppServices;
 using Gamechain.Application.Contracts.Interfaces.Repositories;
 using Gamechain.Application.Contracts.Requests.Auth;
+using Gamechain.Application.Contracts.Requests.Publishers;
 using Gamechain.Domain.Entities.Aggregates.User;
 using Gamechain.Infrastructure.EntityFrameworkCore.Context;
 using Gamechain.Infrastructure.Repositories;
@@ -56,8 +59,10 @@ builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsi
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
+builder.Services.AddTransient<IValidator<CreatePublisherRequest>, CreatePublisherRequestValidator>();
 
 builder.Services.AddTransient<IAuthAppService, AuthAppService>();
+builder.Services.AddTransient<IPublisherAppService, PublisherAppService>();
 
 builder.Services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient<IAuthRepository, AuthRepository>();

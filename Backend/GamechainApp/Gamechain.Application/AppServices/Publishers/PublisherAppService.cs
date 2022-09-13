@@ -2,6 +2,7 @@
 using Gamechain.Application.Contracts.Common.Responses;
 using Gamechain.Application.Contracts.Interfaces.AppServices;
 using Gamechain.Application.Contracts.Interfaces.Repositories;
+using Gamechain.Application.Contracts.Requests.Publishers;
 using Gamechain.Domain.Entities.Aggregates.Publisher;
 using Gamechain.Domain.Exceptions;
 
@@ -9,10 +10,10 @@ namespace Gamechain.Application.AppServices.Publishers
 {
     public class PublisherAppService : IPublisherAppService
     {
-        private readonly IPublisherRepository _publisherRepository;
+        private readonly IRepository<Publisher> _publisherRepository;
         private readonly IMapper _mapper;
 
-        public PublisherAppService(IPublisherRepository publisherRepository, IMapper mapper)
+        public PublisherAppService(IRepository<Publisher> publisherRepository, IMapper mapper)
         {
             _publisherRepository = publisherRepository;
             _mapper = mapper;
@@ -25,16 +26,13 @@ namespace Gamechain.Application.AppServices.Publishers
             return _mapper.Map<List<PublisherResponse>>(publishers);
         }
 
-        public async Task<PublisherResponse> GetPublisherById(Guid publisherId)
+        public async Task<PublisherResponse> CreatePublisher(CreatePublisherRequest request)
         {
-            var publisher = await _publisherRepository.GetById(publisherId);
+            var publisherToCreate = _mapper.Map<Publisher>(request);
 
-            if (publisher == null)
-            {
-                throw new EntityNotFoundException(typeof(Publisher));
-            }
+            await _publisherRepository.Create(publisherToCreate);
 
-            return _mapper.Map<PublisherResponse>(publisher);
+            return _mapper.Map<PublisherResponse>(publisherToCreate);
         }
     }
 }

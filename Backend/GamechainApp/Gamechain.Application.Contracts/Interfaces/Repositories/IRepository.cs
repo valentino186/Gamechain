@@ -6,5 +6,6 @@ namespace Gamechain.Application.Contracts.Interfaces.Repositories
     {
         Task<List<T>> GetAll();
         Task<T?> GetById(Guid id);
+        Task<T> Create(T entity);
     }
 }

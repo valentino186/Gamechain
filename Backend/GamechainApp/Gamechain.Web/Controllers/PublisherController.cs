@@ -1,5 +1,6 @@
 ﻿using Gamechain.Application.Contracts.Common.Responses;
 using Gamechain.Application.Contracts.Interfaces.AppServices;
+using Gamechain.Application.Contracts.Requests.Publishers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gamechain.Web.Controllers
@@ -21,10 +22,10 @@ namespace Gamechain.Web.Controllers
             return _publisherAppService.GetPublishers();
         }
 
-        [HttpGet("{id}")]
-        public Task<PublisherResponse> GetPublisherById(Guid id)
+        [HttpPost]
+        public Task<PublisherResponse> CreatePublisher([FromBody] CreatePublisherRequest request)
         {
-            return _publisherAppService.GetPublisherById(id);
+            return _publisherAppService.CreatePublisher(request);
         }
     }
 }
