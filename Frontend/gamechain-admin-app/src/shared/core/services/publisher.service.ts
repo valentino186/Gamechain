@@ -13,6 +13,7 @@ export const usePublisherService = () => {
             publisherStore.setLoading(true);
     
             const response = await publisherProxy.getPublishers();
+            console.log(response.data)
     
             publisherRepo.insert(response.data);
         }

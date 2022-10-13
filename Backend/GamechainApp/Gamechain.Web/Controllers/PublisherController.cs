@@ -1,6 +1,8 @@
-﻿using Gamechain.Application.Contracts.Common.Responses;
-using Gamechain.Application.Contracts.Interfaces.AppServices;
+﻿using Gamechain.Application.AppServices.Publishers.Commands.CreatePublisher;
+using Gamechain.Application.AppServices.Publishers.Queries.GetPublishers;
+using Gamechain.Application.Contracts.Common.Responses;
 using Gamechain.Application.Contracts.Requests.Publishers;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gamechain.Web.Controllers
@@ -9,23 +11,25 @@ namespace Gamechain.Web.Controllers
     [Route("api/[controller]")]
     public class PublisherController : ControllerBase
     {
-        private readonly IPublisherAppService _publisherAppService;
+        private readonly ISender _mediator;
 
-        public PublisherController(IPublisherAppService publisherAppService)
+        public PublisherController(ISender mediator)
         {
-            _publisherAppService = publisherAppService;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public Task<List<PublisherResponse>> GetPublishers()
         {
-            return _publisherAppService.GetPublishers();
+            return _mediator.Send(new GetPublishersQuery());
         }
 
         [HttpPost]
         public Task<PublisherResponse> CreatePublisher([FromBody] CreatePublisherRequest request)
         {
-            return _publisherAppService.CreatePublisher(request);
+            var command = new CreatePublisherCommand(request.Name);
+
+            return _mediator.Send(command);
         }
     }
 }

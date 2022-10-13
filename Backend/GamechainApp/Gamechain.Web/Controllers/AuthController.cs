@@ -1,6 +1,7 @@
 ﻿using Gamechain.Application.Contracts.Common.Responses;
-using Gamechain.Application.Contracts.Interfaces.AppServices;
 using Gamechain.Application.Contracts.Requests.Auth;
+using Gamechain.Application.Services.Authentication.Queries.Login;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,18 +11,20 @@ namespace Gamechain.Web.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthAppService _authAppService;
+        private readonly ISender _mediator;
 
-        public AuthController(IAuthAppService authAppService)
+        public AuthController(ISender mediator)
         {
-            _authAppService = authAppService;
+            _mediator = mediator;
         }
 
         [HttpPost]
         [Route("Login")]
         public Task<LoginResponse> Login([FromBody] LoginRequest loginRequest)
         {
-            return _authAppService.Login(loginRequest);
+            var query = new LoginQuery(loginRequest.UserName, loginRequest.Password);
+
+            return _mediator.Send(query);
         }
 
         [HttpGet]
