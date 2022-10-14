@@ -1,12 +1,5 @@
-using FluentValidation;
-using FluentValidation.AspNetCore;
 using Gamechain.Application;
-using Gamechain.Application.AppServices.Auth;
-using Gamechain.Application.AppServices.Auth.Validators;
-using Gamechain.Application.AppServices.Publishers.Validators;
 using Gamechain.Application.Contracts.Interfaces.Repositories;
-using Gamechain.Application.Contracts.Requests.Auth;
-using Gamechain.Application.Contracts.Requests.Publishers;
 using Gamechain.Domain.Entities.Aggregates.User;
 using Gamechain.Infrastructure.EntityFrameworkCore.Context;
 using Gamechain.Infrastructure.Repositories;
@@ -51,8 +44,6 @@ builder.Services.AddDbContext<GamechainDbContext>(options =>
 });
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<GamechainDbContext>();
-
-builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

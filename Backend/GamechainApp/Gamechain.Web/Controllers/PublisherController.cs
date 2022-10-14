@@ -1,5 +1,5 @@
-﻿using Gamechain.Application.AppServices.Publishers.Commands.CreatePublisher;
-using Gamechain.Application.AppServices.Publishers.Queries.GetPublishers;
+﻿using Gamechain.Application.Services.Publishers.Commands.CreatePublisher;
+using Gamechain.Application.Services.Publishers.Queries.GetPublishers;
 using Gamechain.Application.Contracts.Common.Responses;
 using Gamechain.Application.Contracts.Requests.Publishers;
 using MediatR;
