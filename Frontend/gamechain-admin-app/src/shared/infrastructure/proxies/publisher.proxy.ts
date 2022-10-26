@@ -6,7 +6,12 @@ export const usePublisherProxy = () => {
         return authGamechainApi.get<PublisherResponse[]>('/Publisher');
     }
 
+    function deletePublisher(publisherId: string) {
+        return authGamechainApi.delete(`/Publisher/${publisherId}`);
+    }
+
     return {
-        getPublishers
+        getPublishers,
+        deletePublisher
     }
 }

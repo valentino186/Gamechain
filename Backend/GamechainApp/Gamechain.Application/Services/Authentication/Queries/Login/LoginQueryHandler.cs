@@ -2,6 +2,7 @@
 using Gamechain.Application.Contracts.Common.Responses;
 using Gamechain.Application.Contracts.Interfaces.Repositories;
 using Gamechain.Domain.Entities.Aggregates.User;
+using Gamechain.Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
@@ -26,14 +27,14 @@ namespace Gamechain.Application.Services.Authentication.Queries.Login
 
             if (user == null)
             {
-                throw new Exception("Incorrect username or password.");
+                throw new LoginException();
             }
 
             var correctPassword = await _userManager.CheckPasswordAsync(user, query.Password);
 
             if (!correctPassword)
             {
-                throw new Exception("Incorrect username or password.");
+                throw new LoginException();
             }
 
             var loginResponse = _mapper.Map<LoginResponse>(user);

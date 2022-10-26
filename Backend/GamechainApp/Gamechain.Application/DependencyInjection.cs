@@ -6,13 +6,13 @@ using System.Reflection;
 
 namespace Gamechain.Application
 {
-    public static class ApplicationDependencyInjection
+    public static class DependencyInjection
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddMediatR(typeof(ApplicationDependencyInjection).Assembly);
+            services.AddMediatR(typeof(DependencyInjection).Assembly);
 
-            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             return services;

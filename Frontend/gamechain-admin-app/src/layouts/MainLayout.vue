@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header bordered class="vf-bg-indigo-6 text-white">
+    <q-header bordered class="bg-grey-9 text-white">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
@@ -9,7 +9,7 @@
     </q-header>
 
     <q-drawer
-      class="vf-bg-indigo-10"
+      class="bg-grey-10"
       show-if-above
       v-model="leftDrawerOpen"
       side="left"
@@ -17,7 +17,7 @@
     >
       <q-item class="text-white" clickable>
         <q-item-section avatar>
-          <q-icon name="inbox" />
+          <q-icon name="groups_2" />
         </q-item-section>
 
         <q-item-section>Publishers</q-item-section>

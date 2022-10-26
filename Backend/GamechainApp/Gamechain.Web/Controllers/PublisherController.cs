@@ -4,6 +4,7 @@ using Gamechain.Application.Contracts.Common.Responses;
 using Gamechain.Application.Contracts.Requests.Publishers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Gamechain.Application.Services.Publishers.Commands.DeletePublisher;
 
 namespace Gamechain.Web.Controllers
 {
@@ -28,6 +29,14 @@ namespace Gamechain.Web.Controllers
         public Task<PublisherResponse> CreatePublisher([FromBody] CreatePublisherRequest request)
         {
             var command = new CreatePublisherCommand(request.Name);
+
+            return _mediator.Send(command);
+        }
+
+        [HttpDelete("{publisherId}")]
+        public Task DeletePublisher(Guid publisherId)
+        {
+            var command = new DeletePublisherCommand(publisherId);
 
             return _mediator.Send(command);
         }
