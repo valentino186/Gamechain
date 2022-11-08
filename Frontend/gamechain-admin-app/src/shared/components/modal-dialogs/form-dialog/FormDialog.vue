@@ -15,7 +15,7 @@
 
         <q-card-actions align="right">
           <q-btn unelevated label="Close" color="grey-9" v-close-popup />
-          <q-btn @click="save" unelevated label="Save" color="primary" v-close-popup />
+          <q-btn @click="handleSaveBtnClick" unelevated label="Save" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>

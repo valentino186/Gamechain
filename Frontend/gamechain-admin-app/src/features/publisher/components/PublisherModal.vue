@@ -1,32 +1,32 @@
 <template>
     <form-dialog @save="save">
-        <q-input class="full-width" outlined v-model="formData.name" label="Name" />
+        <q-input class="full-width" outlined v-model="publisher.name" label="Name" />
     </form-dialog>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import FormDialog from 'src/shared/components/modal-dialogs/form-dialog/FormDialog.vue';
-import { CreatePublisherRequest } from 'src/shared/infrastructure/models/requests/publisher/create-publisher-request.model';
+import { Publisher } from 'src/shared/core/entities/publisher.model';
 
 export default defineComponent({
     components: { FormDialog },
     emits: ['save'],
-    setup(_, { emit }) {
-        const formData = reactive({
-            name: ''
-        })
+    props: {
+        publisher: {
+            type: Object as PropType<Publisher>,
+            required: true
+        }
+    },
+    setup(props, { emit }) {
+        const publisher = props.publisher;
 
         function save() {
-            const createPublisherRequest: CreatePublisherRequest = {
-                name: formData.name
-            }
-
-            emit('save', createPublisherRequest);
+            emit('save', publisher);
         }
 
         return {
-            formData,
+            publisher,
             save
         }
     }

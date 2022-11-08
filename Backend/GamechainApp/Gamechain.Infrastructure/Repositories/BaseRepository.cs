@@ -35,6 +35,15 @@ namespace Gamechain.Infrastructure.Repositories
             return entity;
         }
 
+        public async Task<T> Update(T entity)
+        {
+            _dbSet.Update(entity);
+
+            await _context.SaveChangesAsync();
+
+            return entity;
+        }
+
         public async Task Delete(T entity)
         {
             _dbSet.Remove(entity);

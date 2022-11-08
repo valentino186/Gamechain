@@ -6,7 +6,8 @@
   "author": "valentino186",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "dev:admin": "yarn quasar dev"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",

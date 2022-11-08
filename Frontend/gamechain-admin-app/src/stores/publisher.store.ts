@@ -25,6 +25,15 @@ export const usePublisherStore = defineStore('publishers', () => {
         state.publishers = publishers;
     }
 
+    function createPublisher(publisher: Publisher) {
+        state.publishers.push(publisher);
+    }
+
+    function updatePublisher(publisher: Publisher) {
+        const publisherIndex = state.publishers.findIndex(x => x.id === publisher.id);
+        state.publishers[publisherIndex] = { ...publisher };
+    }
+
     function deletePublisher(publisherId: string) {
         state.publishers = state.publishers.filter(x => x.id !== publisherId);
     }
@@ -34,6 +43,8 @@ export const usePublisherStore = defineStore('publishers', () => {
         getPublishers,
         setLoading,
         setPublishers,
+        createPublisher,
+        updatePublisher,
         deletePublisher
     }
 })
