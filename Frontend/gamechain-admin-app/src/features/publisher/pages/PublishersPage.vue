@@ -6,6 +6,11 @@
             </q-card-section>
         </q-card>
 
+        <filter-publisher 
+            @search="filterPublishers"
+            class="q-mt-md">
+        </filter-publisher>
+
         <q-table
             class="q-mt-md"
             title="Publishers"
@@ -18,15 +23,24 @@
             <template #body-cell-actions="props">
                 <q-td auto-width key="actions" :props="props">
                     <q-btn class="q-mr-sm" unelevated round color="deep-orange" icon="edit" size="sm" @click="handleUpdateBtnClick(props.row)" />
-                    <q-btn unelevated round color="negative" icon="delete" size="sm" @click="handleDeleteBtnClick(props.row.id)" />
+                    <q-btn unelevated round color="negative" icon="delete" size="sm" @click="handleDeleteBtnClick(props.row)" />
                 </q-td>
             </template>
         </q-table>
 
-        <publisher-modal 
+        <publisher-modal
             v-if="showPublisherModal"
             :publisher="selectedPublisher"
-            @save="savePublisher" />
+            @save="savePublisher"
+            @close="closePublisherModal">
+        </publisher-modal>
+
+        <confirmation-modal
+            v-if="showConfirmationModal"
+            :displayMessage="`Are you sure you want to delete '${selectedPublisher.name}' and all of their games?`"
+            @ok="deletePublisher"
+            @cancel="closeConfirmationModal">
+        </confirmation-modal>
     </q-page>
 </template>
 
@@ -36,6 +50,9 @@ import { usePublisherService } from "src/shared/core/services/publisher.service"
 import { usePublisherStore } from "src/stores/publisher.store";
 import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import PublisherModal from "../components/PublisherModal.vue";
+import FilterPublisher from "../components/FilterPublisher.vue";
+import ConfirmationModal from "src/shared/components/modals/confirmation-modal/ConfirmationModal.vue";
+import { PublisherFilterForm } from "src/shared/infrastructure/models/filters/publisher-filter-form.model";
 
 const initialPublisher : Publisher = {
     id: '',
@@ -43,10 +60,15 @@ const initialPublisher : Publisher = {
 }
 
 export default defineComponent({
-    components: { PublisherModal },
+    components: { PublisherModal, ConfirmationModal, FilterPublisher },
     setup() {
-        const selectedPublisher = reactive<Publisher>(initialPublisher);
+        const selectedPublisher = reactive<Publisher>({
+            id: '',
+            name: ''
+        });
+
         const showPublisherModal = ref<boolean>(false);
+        const showConfirmationModal = ref<boolean>(false);
 
         const publisherService = usePublisherService();
         const publisherStore = usePublisherStore();
@@ -61,6 +83,7 @@ export default defineComponent({
         const publishers = computed(() => publisherStore.getPublishers());
 
         onMounted(() => {
+            setSelectedPublisher(initialPublisher);
             publisherService.getPublishers();
         })
 
@@ -73,8 +96,9 @@ export default defineComponent({
             showPublisherModal.value = true;
         }
 
-        function handleDeleteBtnClick(publisherId: string) {
-            publisherService.deletePublisher(publisherId);
+        function handleDeleteBtnClick(publisher: Publisher) {
+            setSelectedPublisher(publisher)
+            showConfirmationModal.value = true;
         }
 
         function savePublisher(publisher: Publisher) {
@@ -83,7 +107,7 @@ export default defineComponent({
             else
                 createPublisher(publisher);
 
-            Object.assign(selectedPublisher, initialPublisher);
+            setSelectedPublisher(initialPublisher);
             showPublisherModal.value = false;
         }
 
@@ -95,6 +119,30 @@ export default defineComponent({
             publisherService.updatePublisher(publisher.id, publisher);
         }
 
+        function deletePublisher() {
+            publisherService.deletePublisher(selectedPublisher.id);
+            showConfirmationModal.value = false;
+            setSelectedPublisher(initialPublisher);
+        }
+
+        function setSelectedPublisher(publisher: Publisher) {
+            Object.assign(selectedPublisher, publisher);
+        }
+
+        function closePublisherModal() {
+            setSelectedPublisher(initialPublisher);
+            showPublisherModal.value = false;
+        }
+
+        function closeConfirmationModal() {
+            setSelectedPublisher(initialPublisher);
+            showConfirmationModal.value = false;
+        }
+
+        function filterPublishers(filters: PublisherFilterForm) {
+            publisherStore.setFilters(filters);
+        }
+
         return {
             columns,
             loading,
@@ -102,9 +150,14 @@ export default defineComponent({
             handleCreateNewBtnClick,
             handleUpdateBtnClick,
             handleDeleteBtnClick,
+            showConfirmationModal,
             showPublisherModal,
             savePublisher,
-            selectedPublisher
+            deletePublisher,
+            selectedPublisher,
+            closePublisherModal,
+            closeConfirmationModal,
+            filterPublishers
         }
     }
 })

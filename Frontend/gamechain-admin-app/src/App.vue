@@ -9,3 +9,9 @@ export default defineComponent({
   name: 'App'
 });
 </script>
+
+<style>
+  .q-field {
+    font-size: 13px;
+  }
+</style>

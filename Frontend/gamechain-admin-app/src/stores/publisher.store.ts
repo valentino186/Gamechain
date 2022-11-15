@@ -1,20 +1,25 @@
 import { Publisher } from './../shared/core/entities/publisher.model';
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
+import { PublisherFilterForm } from 'src/shared/infrastructure/models/filters/publisher-filter-form.model';
 
 interface PublisherState {
     publishers: Publisher[];
     loading: boolean;
+    filters: PublisherFilterForm;
 }
 
 export const usePublisherStore = defineStore('publishers', () => {
     const state = reactive<PublisherState>({
         publishers: [],
-        loading: false
+        loading: false,
+        filters: {
+            name: ''
+        }
     })
 
     function getPublishers() {
-        return state.publishers;
+        return state.publishers.filter(x => x.name.toLowerCase().includes(state.filters.name.toLowerCase()));
     }
     
     function setLoading(status: boolean) {
@@ -23,6 +28,10 @@ export const usePublisherStore = defineStore('publishers', () => {
     
     function setPublishers(publishers: Publisher[]) {
         state.publishers = publishers;
+    }
+
+    function setFilters(publisherFilterForm: PublisherFilterForm) {
+        state.filters = publisherFilterForm;
     }
 
     function createPublisher(publisher: Publisher) {
@@ -45,6 +54,7 @@ export const usePublisherStore = defineStore('publishers', () => {
         setPublishers,
         createPublisher,
         updatePublisher,
-        deletePublisher
+        deletePublisher,
+        setFilters
     }
 })
