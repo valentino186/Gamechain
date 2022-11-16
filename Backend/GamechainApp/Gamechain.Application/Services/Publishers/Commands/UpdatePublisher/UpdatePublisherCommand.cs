@@ -1,4 +1,4 @@
-﻿using Gamechain.Application.Contracts.Common.Responses;
+﻿using Gamechain.Application.Common.Responses;
 using MediatR;
 
 namespace Gamechain.Application.Services.Publishers.Commands.UpdatePublisher

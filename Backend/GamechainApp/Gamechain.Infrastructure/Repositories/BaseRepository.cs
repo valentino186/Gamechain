@@ -1,4 +1,4 @@
-﻿using Gamechain.Application.Contracts.Interfaces.Repositories;
+﻿using Gamechain.Application.Interfaces.Repositories;
 using Gamechain.Domain.Entities.Common;
 using Gamechain.Infrastructure.EntityFrameworkCore.Context;
 using Microsoft.EntityFrameworkCore;

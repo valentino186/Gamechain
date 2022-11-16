@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Gamechain.Application.Contracts.Common.Responses;
+using Gamechain.Application.Common.Responses;
 using Gamechain.Domain.Entities.Aggregates.User;
 
 namespace Gamechain.Application.Profiles

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Gamechain.Application.Contracts.Common.Responses;
+using Gamechain.Application.Common.Responses;
 using Gamechain.Application.Services.Publishers.Commands.CreatePublisher;
 using Gamechain.Application.Services.Publishers.Commands.UpdatePublisher;
 using Gamechain.Domain.Entities.Aggregates.Publisher;

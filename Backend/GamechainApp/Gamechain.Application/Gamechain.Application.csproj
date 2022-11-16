@@ -15,11 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Gamechain.Application.Contracts\Gamechain.Application.Contracts.csproj" />
+    <Folder Include="Services\Authentication\Commands\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Authentication\Commands\" />
+    <ProjectReference Include="..\Gamechain.Domain\Gamechain.Domain.csproj" />
   </ItemGroup>
 
 </Project>

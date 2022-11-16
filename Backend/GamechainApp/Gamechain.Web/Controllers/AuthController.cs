@@ -1,6 +1,6 @@
-﻿using Gamechain.Application.Contracts.Common.Responses;
-using Gamechain.Application.Contracts.Requests.Auth;
+﻿using Gamechain.Application.Common.Responses;
 using Gamechain.Application.Services.Authentication.Queries.Login;
+using Gamechain.Application.Services.Authentication.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

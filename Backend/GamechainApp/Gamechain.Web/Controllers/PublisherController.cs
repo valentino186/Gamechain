@@ -1,11 +1,11 @@
-﻿using Gamechain.Application.Services.Publishers.Commands.CreatePublisher;
-using Gamechain.Application.Services.Publishers.Queries.GetPublishers;
-using Gamechain.Application.Contracts.Common.Responses;
-using Gamechain.Application.Contracts.Requests.Publishers;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Gamechain.Application.Common.Responses;
+using Gamechain.Application.Services.Publishers.Commands.CreatePublisher;
 using Gamechain.Application.Services.Publishers.Commands.DeletePublisher;
 using Gamechain.Application.Services.Publishers.Commands.UpdatePublisher;
+using Gamechain.Application.Services.Publishers.Queries.GetPublishers;
+using Gamechain.Application.Services.Publishers.Requests;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Gamechain.Web.Controllers
 {

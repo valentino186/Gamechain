@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Gamechain.Application.Contracts.Common.Responses;
-using Gamechain.Application.Contracts.Interfaces.Repositories;
+using Gamechain.Application.Common.Responses;
+using Gamechain.Application.Interfaces.Repositories;
 using Gamechain.Domain.Entities.Aggregates.User;
 using Gamechain.Domain.Exceptions;
 using MediatR;

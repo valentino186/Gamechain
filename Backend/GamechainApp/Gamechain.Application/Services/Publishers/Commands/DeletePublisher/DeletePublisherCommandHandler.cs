@@ -1,4 +1,4 @@
-﻿using Gamechain.Application.Contracts.Interfaces.Repositories;
+﻿using Gamechain.Application.Interfaces.Repositories;
 using Gamechain.Domain.Entities.Aggregates.Publisher;
 using Gamechain.Domain.Exceptions;
 using MediatR;
