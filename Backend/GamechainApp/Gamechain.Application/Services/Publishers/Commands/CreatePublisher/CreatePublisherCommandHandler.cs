@@ -19,11 +19,11 @@ namespace Gamechain.Application.Services.Publishers.Commands.CreatePublisher
 
         public async Task<PublisherResponse> Handle(CreatePublisherCommand command, CancellationToken cancellationToken)
         {
-            var publisherToCreate = _mapper.Map<Publisher>(command);
+            var publisher = _mapper.Map<Publisher>(command);
 
-            await _publisherRepository.Create(publisherToCreate);
+            await _publisherRepository.Create(publisher);
 
-            return _mapper.Map<PublisherResponse>(publisherToCreate);
+            return _mapper.Map<PublisherResponse>(publisher);
         }
     }
 }
