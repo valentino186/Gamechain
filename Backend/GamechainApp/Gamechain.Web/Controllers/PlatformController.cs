@@ -1,5 +1,6 @@
 ﻿using Gamechain.Application.Common.Responses;
 using Gamechain.Application.Services.Platforms.Commands.CreatePlatform;
+using Gamechain.Application.Services.Platforms.Commands.DeletePlatform;
 using Gamechain.Application.Services.Platforms.Commands.UpdatePlatform;
 using Gamechain.Application.Services.Platforms.Queries.GetPlatforms;
 using Gamechain.Application.Services.Platforms.Requests;
@@ -13,7 +14,7 @@ namespace Gamechain.Web.Controllers
     public class PlatformController : ControllerBase
     {
         private readonly ISender _mediator;
-        
+
         public PlatformController(ISender mediator)
         {
             _mediator = mediator;
@@ -37,6 +38,14 @@ namespace Gamechain.Web.Controllers
         public Task<PlatformResponse> UpdatePlatform(Guid platformId, [FromBody] UpdatePlatformRequest request)
         {
             var command = new UpdatePlatformCommand(platformId, request.Name);
+
+            return _mediator.Send(command);
+        }
+
+        [HttpDelete("{platformId}")]
+        public Task DeletePlatform(Guid platformId)
+        {
+            var command = new DeletePlatformCommand(platformId);
 
             return _mediator.Send(command);
         }
