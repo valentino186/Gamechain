@@ -3,7 +3,6 @@ using Gamechain.Application.Services.Platforms.Commands.CreatePlatform;
 using Gamechain.Application.Services.Platforms.Commands.DeletePlatform;
 using Gamechain.Application.Services.Platforms.Commands.UpdatePlatform;
 using Gamechain.Application.Services.Platforms.Queries.GetPlatforms;
-using Gamechain.Application.Services.Platforms.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,18 +26,14 @@ namespace Gamechain.Web.Controllers
         }
 
         [HttpPost]
-        public Task<PlatformResponse> CreatePlatform([FromBody] CreatePlatformRequest request)
+        public Task<PlatformResponse> CreatePlatform([FromBody] CreatePlatformCommand command)
         {
-            var command = new CreatePlatformCommand(request.Name);
-
             return _mediator.Send(command);
         }
 
         [HttpPut("{platformId}")]
-        public Task<PlatformResponse> UpdatePlatform(Guid platformId, [FromBody] UpdatePlatformRequest request)
+        public Task<PlatformResponse> UpdatePlatform([FromBody] UpdatePlatformCommand command)
         {
-            var command = new UpdatePlatformCommand(platformId, request.Name);
-
             return _mediator.Send(command);
         }
 
