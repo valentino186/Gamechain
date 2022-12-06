@@ -1,5 +1,5 @@
-import { UpdatePublisherRequest } from './../models/requests/publisher/update-publisher-request.model';
-import { CreatePublisherRequest } from './../models/requests/publisher/create-publisher-request.model';
+import { UpdatePublisherCommand } from '../models/requests/publisher/update-publisher-command.model';
+import { CreatePublisherCommand } from '../models/requests/publisher/create-publisher-command.model';
 import { PublisherResponse } from './../models/responses/publisher-response.model';
 import { authGamechainApi } from "src/boot/axios"
 
@@ -10,12 +10,12 @@ export const usePublisherProxy = () => {
         return authGamechainApi.get<PublisherResponse[]>(url);
     }
 
-    function createPublisher(createPublisherRequest: CreatePublisherRequest) {
-        return authGamechainApi.post<PublisherResponse>(url, createPublisherRequest);
+    function createPublisher(createPublisherCommand: CreatePublisherCommand) {
+        return authGamechainApi.post<PublisherResponse>(url, createPublisherCommand);
     }
 
-    function updatePublisher(publisherId: string, updatePublisherRequest: UpdatePublisherRequest) {
-        return authGamechainApi.put<PublisherResponse>(`${url}/${publisherId}`, updatePublisherRequest);
+    function updatePublisher(updatePublisherCommand: UpdatePublisherCommand) {
+        return authGamechainApi.put<PublisherResponse>(url, updatePublisherCommand);
     }
 
     function deletePublisher(publisherId: string) {

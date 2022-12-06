@@ -1,6 +1,6 @@
 import { useNotify } from './../../components/notify/useNotify';
-import { UpdatePublisherRequest } from './../../infrastructure/models/requests/publisher/update-publisher-request.model';
-import { CreatePublisherRequest } from 'src/shared/infrastructure/models/requests/publisher/create-publisher-request.model';
+import { UpdatePublisherCommand } from '../../infrastructure/models/requests/publisher/update-publisher-command.model';
+import { CreatePublisherCommand } from 'src/shared/infrastructure/models/requests/publisher/create-publisher-command.model';
 import { usePublisherStore } from './../../../stores/publisher.store';
 import { usePublisherProxy } from './../../infrastructure/proxies/publisher.proxy';
 
@@ -25,7 +25,7 @@ export const usePublisherService = () => {
         }
     }
 
-    async function createPublisher(createPublisherRequest: CreatePublisherRequest) {
+    async function createPublisher(createPublisherRequest: CreatePublisherCommand) {
         try {
             publisherStore.setLoading(true);
 
@@ -43,11 +43,11 @@ export const usePublisherService = () => {
         }
     }
 
-    async function updatePublisher(publisherId: string, updatePublisherRequest: UpdatePublisherRequest) {
+    async function updatePublisher(updatePublisherRequest: UpdatePublisherCommand) {
         try {
             publisherStore.setLoading(true);
 
-            const response = await publisherProxy.updatePublisher(publisherId, updatePublisherRequest);
+            const response = await publisherProxy.updatePublisher(updatePublisherRequest);
 
             publisherStore.updatePublisher(response.data);
 

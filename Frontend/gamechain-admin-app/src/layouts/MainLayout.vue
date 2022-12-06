@@ -15,20 +15,20 @@
       side="left"
       bordered
     >
-      <q-item to="/publishers" class="text-white" clickable >
-        <q-item-section avatar>
-          <q-icon name="groups_2" />
-        </q-item-section>
-
-        <q-item-section>Publishers</q-item-section>
-      </q-item>
-
       <q-item to="/platforms" class="text-white" clickable>
         <q-item-section avatar>
           <q-icon name="sports_esports" />
         </q-item-section>
 
         <q-item-section>Platforms</q-item-section>
+      </q-item>
+
+      <q-item to="/publishers" class="text-white" clickable >
+        <q-item-section avatar>
+          <q-icon name="groups_2" />
+        </q-item-section>
+
+        <q-item-section>Publishers</q-item-section>
       </q-item>
     </q-drawer>
 

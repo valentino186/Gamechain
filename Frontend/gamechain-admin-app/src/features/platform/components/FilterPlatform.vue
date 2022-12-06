@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
-import BaseFilter from 'src/shared/components/BaseFilter.vue'
+import BaseFilter from 'src/shared/components/BaseFilter.vue';
 
 export default defineComponent({
     components: { BaseFilter },

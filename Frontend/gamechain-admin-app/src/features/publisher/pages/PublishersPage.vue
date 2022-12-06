@@ -79,7 +79,7 @@ export default defineComponent({
         ];
 
         const loading = computed(() => publisherStore.state.loading);
-
+        
         const publishers = computed(() => publisherStore.getPublishers());
 
         onMounted(() => {
@@ -116,7 +116,7 @@ export default defineComponent({
         }
 
         function updatePublisher(publisher: Publisher) {
-            publisherService.updatePublisher(publisher.id, publisher);
+            publisherService.updatePublisher(publisher);
         }
 
         function deletePublisher() {
