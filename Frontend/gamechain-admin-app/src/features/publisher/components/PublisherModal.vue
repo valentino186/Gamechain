@@ -4,7 +4,7 @@
         @close="close" 
         @save="save"
     >
-        <q-input class="full-width" outlined v-model="v$.name.$model" :error="v$.name.$error" error-message="Name is required." label="Name" />
+        <q-input class="full-width" dense outlined v-model="v$.name.$model" :error="v$.name.$error" error-message="Name is required." label="Name" />
     </form-modal>
 </template>
 

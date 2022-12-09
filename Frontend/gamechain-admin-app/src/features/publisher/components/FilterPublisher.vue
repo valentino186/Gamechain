@@ -5,6 +5,7 @@
     >
         <q-input
             v-model="filterValue.name"
+            dense
             outlined 
             label="Name" />
     </base-filter>
