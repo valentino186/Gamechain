@@ -52,6 +52,7 @@ builder.Services.AddApplication();
 builder.Services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient<IAuthRepository, AuthRepository>();
 builder.Services.AddTransient<IPublisherRepository, PublisherRepository>();
+builder.Services.AddTransient<IPlatformRepository, PlatformRepository>();
 
 var app = builder.Build();
 

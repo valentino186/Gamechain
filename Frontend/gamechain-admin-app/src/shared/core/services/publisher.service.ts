@@ -1,8 +1,8 @@
-import { useNotify } from './../../components/notify/useNotify';
-import { UpdatePublisherRequest } from './../../infrastructure/models/requests/publisher/update-publisher-request.model';
-import { CreatePublisherRequest } from 'src/shared/infrastructure/models/requests/publisher/create-publisher-request.model';
-import { usePublisherStore } from './../../../stores/publisher.store';
+import { CreatePublisherCommand } from 'src/shared/infrastructure/models/requests/publisher/create-publisher-command.model';
+import { UpdatePublisherCommand } from '../../infrastructure/models/requests/publisher/update-publisher-command.model';
 import { usePublisherProxy } from './../../infrastructure/proxies/publisher.proxy';
+import { usePublisherStore } from './../../../stores/publisher.store';
+import { useNotify } from './../../components/notify/useNotify';
 
 export const usePublisherService = () => {
     const publisherProxy = usePublisherProxy();
@@ -17,15 +17,15 @@ export const usePublisherService = () => {
 
             publisherStore.setPublishers(response.data);
         }
-        catch (error) {
-            console.error(error)
+        catch {
+            notify.negative('An error has occured while trying to fetch data.');
         }
         finally {
             publisherStore.setLoading(false);
         }
     }
 
-    async function createPublisher(createPublisherRequest: CreatePublisherRequest) {
+    async function createPublisher(createPublisherRequest: CreatePublisherCommand) {
         try {
             publisherStore.setLoading(true);
 
@@ -35,26 +35,26 @@ export const usePublisherService = () => {
 
             notify.success('Publisher created successfully!');
         }
-        catch (error) {
-            notify.negative('An error has occured while trying to save data.');
+        catch {
+            notify.negative('An error has occured while trying to create Publisher.');
         }
         finally {
             publisherStore.setLoading(false);
         }
     }
 
-    async function updatePublisher(publisherId: string, updatePublisherRequest: UpdatePublisherRequest) {
+    async function updatePublisher(updatePublisherRequest: UpdatePublisherCommand) {
         try {
             publisherStore.setLoading(true);
 
-            const response = await publisherProxy.updatePublisher(publisherId, updatePublisherRequest);
+            const response = await publisherProxy.updatePublisher(updatePublisherRequest);
 
             publisherStore.updatePublisher(response.data);
 
             notify.success('Publisher updated successfully!');
         }
-        catch (error) {
-            notify.negative('An error has occured while trying to save data.');
+        catch {
+            notify.negative('An error has occured while trying to update Publisher.');
         }
         finally {
             publisherStore.setLoading(false);
@@ -71,8 +71,8 @@ export const usePublisherService = () => {
 
             notify.success('Publisher deleted successfully!');
         }
-        catch (error) {
-            notify.negative('An error has occured while trying to delete data.');
+        catch {
+            notify.negative('An error has occured while trying to delete Publisher.');
         }
         finally {
             publisherStore.setLoading(false);

@@ -10,7 +10,7 @@
                     <q-separator inset />
 
                     <q-card-section>
-                        <q-input v-model="loginRequest.userName" outlined label="Username" class="q-mb-md">
+                        <q-input v-model="loginQuery.userName" outlined label="Username" class="q-mb-md">
                             <template v-slot:prepend>
                                 <q-icon name="person" color="indigo-6" />
                             </template>
@@ -19,7 +19,7 @@
                             </template>
                         </q-input>
 
-                        <q-input v-model="loginRequest.password" outlined label="Password" :type="showPassword ? 'text' : 'password'">
+                        <q-input v-model="loginQuery.password" outlined label="Password" :type="showPassword ? 'text' : 'password'">
                             <template v-slot:prepend>
                                 <q-icon name="key" color="indigo-6" />
                             </template>
@@ -49,14 +49,14 @@
 import { defineComponent, reactive, ref } from 'vue';
 import { useAuthStore } from 'src/stores/auth.store';
 import { useAuthService } from 'src/shared/core/services/auth.service';
-import { LoginRequest } from 'src/shared/infrastructure/models/requests/auth/login-request.model';
+import { LoginQuery } from 'src/shared/infrastructure/models/requests/auth/login-query.model';
 import { useRouter } from 'vue-router';
 
 export default defineComponent({
     setup() {
         const showPassword = ref<boolean>(false);
 
-        const loginRequest = reactive<LoginRequest>({
+        const loginQuery = reactive<LoginQuery>({
             userName: '',
             password: ''
         });
@@ -66,7 +66,7 @@ export default defineComponent({
         const router = useRouter();
 
         async function handleLoginBtnClick() {
-            await authService.login(loginRequest);
+            await authService.login(loginQuery);
 
             if (state.token)
                 router.push({ path: '/app/publishers' })
@@ -74,7 +74,7 @@ export default defineComponent({
 
         return {
             state,
-            loginRequest,
+            loginQuery,
             showPassword,
             handleLoginBtnClick
         }

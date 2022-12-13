@@ -1,6 +1,6 @@
-import { Publisher } from './../shared/core/entities/publisher.model';
-import { defineStore } from 'pinia';
 import { reactive } from 'vue';
+import { defineStore } from 'pinia';
+import { Publisher } from './../shared/core/entities/publisher.model';
 import { PublisherFilterForm } from 'src/shared/infrastructure/models/filters/publisher-filter-form.model';
 
 interface PublisherState {
@@ -31,7 +31,7 @@ export const usePublisherStore = defineStore('publishers', () => {
     }
 
     function setFilters(publisherFilterForm: PublisherFilterForm) {
-        state.filters = publisherFilterForm;
+        Object.assign(state.filters, publisherFilterForm);
     }
 
     function createPublisher(publisher: Publisher) {

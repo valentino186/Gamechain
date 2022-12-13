@@ -17,7 +17,7 @@ namespace Gamechain.Application.Services.Publishers.Queries.GetPublishers
             _mapper = mapper;
         }
 
-        public async Task<List<PublisherResponse>> Handle(GetPublishersQuery request, CancellationToken cancellationToken)
+        public async Task<List<PublisherResponse>> Handle(GetPublishersQuery query, CancellationToken cancellationToken)
         {
             var publishers = await _publisherRepository.GetAll();
 

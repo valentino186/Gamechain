@@ -1,6 +1,6 @@
 import { useAuthStore } from './../../../stores/auth.store';
 import { useAuthProxy } from './../../infrastructure/proxies/auth.proxy';
-import { LoginRequest } from './../../infrastructure/models/requests/auth/login-request.model';
+import { LoginRequest } from '../../infrastructure/models/requests/auth/login-query.model';
 
 export const useAuthService = () => {
     const authProxy = useAuthProxy();

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Services\Authentication\Commands\" />
+    <Folder Include="Services\Genres\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,6 +17,7 @@
             :columns="columns"
             :rows="publishers"
             :loading="loading"
+            :pagination="initialPagination"
             flat
             bordered
         >
@@ -45,16 +46,17 @@
 </template>
 
 <script lang="ts">
+import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import { Publisher } from "src/shared/core/entities/publisher.model";
 import { usePublisherService } from "src/shared/core/services/publisher.service";
 import { usePublisherStore } from "src/stores/publisher.store";
-import { computed, defineComponent, onMounted, reactive, ref } from "vue";
+import { PublisherFilterForm } from "src/shared/infrastructure/models/filters/publisher-filter-form.model";
+
 import PublisherModal from "../components/PublisherModal.vue";
 import FilterPublisher from "../components/FilterPublisher.vue";
 import ConfirmationModal from "src/shared/components/modals/confirmation-modal/ConfirmationModal.vue";
-import { PublisherFilterForm } from "src/shared/infrastructure/models/filters/publisher-filter-form.model";
 
-const initialPublisher : Publisher = {
+const initialPublisher: Publisher = {
     id: '',
     name: ''
 }
@@ -73,14 +75,17 @@ export default defineComponent({
         const publisherService = usePublisherService();
         const publisherStore = usePublisherStore();
 
+        const loading = computed(() => publisherStore.state.loading);
+        const publishers = computed(() => publisherStore.getPublishers());
+
         const columns = [
             { name: 'name', align: 'left', label: 'Name', field: 'name', sortable: true },
             { name: 'actions', align: 'center', label: 'Actions' }
         ];
 
-        const loading = computed(() => publisherStore.state.loading);
-
-        const publishers = computed(() => publisherStore.getPublishers());
+        const initialPagination = {
+            sortBy: 'name'
+        };
 
         onMounted(() => {
             setSelectedPublisher(initialPublisher);
@@ -107,8 +112,7 @@ export default defineComponent({
             else
                 createPublisher(publisher);
 
-            setSelectedPublisher(initialPublisher);
-            showPublisherModal.value = false;
+            closePublisherModal();
         }
 
         function createPublisher(publisher: Publisher) {
@@ -116,13 +120,12 @@ export default defineComponent({
         }
 
         function updatePublisher(publisher: Publisher) {
-            publisherService.updatePublisher(publisher.id, publisher);
+            publisherService.updatePublisher(publisher);
         }
 
         function deletePublisher() {
             publisherService.deletePublisher(selectedPublisher.id);
-            showConfirmationModal.value = false;
-            setSelectedPublisher(initialPublisher);
+            closeConfirmationModal();
         }
 
         function setSelectedPublisher(publisher: Publisher) {
@@ -147,6 +150,7 @@ export default defineComponent({
             columns,
             loading,
             publishers,
+            initialPagination,
             handleCreateNewBtnClick,
             handleUpdateBtnClick,
             handleDeleteBtnClick,

@@ -1,22 +1,21 @@
-import { RouteRecordRaw } from "vue-router";
 import MainLayout from "layouts/MainLayout.vue";
-import PublishersPage from "src/features/publisher/pages/PublishersPage.vue";
+import { RouteRecordRaw } from "vue-router";
 import { loginRoutes } from "src/features/login/login.routes";
+import { publisherRoutes } from './../features/publisher/publisher.routes';
+import { platformRoutes } from './../features/platform/platform.routes';
 
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    redirect: "/app/publishers",
+    redirect: "/publishers",
   },
   ...loginRoutes,
   {
-    path: "/app",
+    path: "/",
     component: MainLayout,
     children: [
-      {
-        path: "publishers",
-        component: PublishersPage,
-      }
+      ...publisherRoutes,
+      ...platformRoutes
     ],
     meta: {
       requiresAuth: true
