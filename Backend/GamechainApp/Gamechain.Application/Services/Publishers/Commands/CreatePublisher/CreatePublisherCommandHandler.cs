@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Gamechain.Application.Common.Responses;
-using Gamechain.Application.Interfaces.Repositories;
+using Gamechain.Application.Interfaces.Repositories.Common;
 using Gamechain.Domain.Entities.Aggregates.Publisher;
 using MediatR;
 

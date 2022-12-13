@@ -1,9 +1,9 @@
-﻿using Gamechain.Application.Interfaces.Repositories;
+﻿using Gamechain.Application.Interfaces.Repositories.Common;
 using Gamechain.Domain.Entities.Common;
 using Gamechain.Infrastructure.EntityFrameworkCore.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Gamechain.Infrastructure.Repositories
+namespace Gamechain.Infrastructure.Repositories.Common
 {
     public class BaseRepository<T> : IRepository<T> where T : AggregateRoot
     {
