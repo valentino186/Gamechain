@@ -31,7 +31,7 @@ export const usePublisherStore = defineStore('publishers', () => {
     }
 
     function setFilters(publisherFilterForm: PublisherFilterForm) {
-        state.filters = publisherFilterForm;
+        Object.assign(state.filters, publisherFilterForm);
     }
 
     function createPublisher(publisher: Publisher) {

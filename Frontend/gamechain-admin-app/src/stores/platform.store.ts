@@ -1,25 +1,37 @@
 import { reactive } from 'vue';
 import { defineStore } from 'pinia';
 import { Platform } from './../shared/core/entities/platform.model';
+import { PlatformFilterForm } from './../shared/infrastructure/models/filters/platform-filter.form.model';
 
 interface PlatformState {
     platforms: Platform[];
     loading: boolean;
-    // filters: PlatformFilterForm;
+    filters: PlatformFilterForm;
 }
 
 export const usePlatformStore = defineStore('platforms', () => {
     const state = reactive<PlatformState>({
         platforms: [],
-        loading: false
+        loading: false,
+        filters: {
+            name: ''
+        }
     });
+
+    function getPlatforms() {
+        return state.platforms.filter(x => x.name.toLowerCase().includes(state.filters.name.toLowerCase()));
+    }
+
+    function setLoading(status: boolean) {
+        state.loading = status;
+    }
 
     function setPlatforms(platforms: Platform[]) {
         state.platforms = platforms;
     }
 
-    function setLoading(status: boolean) {
-        state.loading = status;
+    function setFilters(platformFilterForm: PlatformFilterForm) {
+        Object.assign(state.filters, platformFilterForm);
     }
 
     function createPlatform(platform: Platform) {
@@ -36,8 +48,11 @@ export const usePlatformStore = defineStore('platforms', () => {
     }
 
     return {
-        setPlatforms,
+        state,
+        getPlatforms,
         setLoading,
+        setPlatforms,
+        setFilters,
         createPlatform,
         updatePlatform,
         deletePlatform

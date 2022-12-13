@@ -67,7 +67,9 @@ export const usePlatformService = () => {
 
             await platformProxy.deletePlatform(platformId);
 
-            platformStore.deletePlatform(platformId)
+            platformStore.deletePlatform(platformId);
+
+            notify.success('Platform deleted successfully!');
         }
         catch {
             notify.negative('An error has occured while trying to delete Platform');

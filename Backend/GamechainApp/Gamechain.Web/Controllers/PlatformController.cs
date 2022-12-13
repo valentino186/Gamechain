@@ -31,7 +31,7 @@ namespace Gamechain.Web.Controllers
             return _mediator.Send(command);
         }
 
-        [HttpPut("{platformId}")]
+        [HttpPut]
         public Task<PlatformResponse> UpdatePlatform([FromBody] UpdatePlatformCommand command)
         {
             return _mediator.Send(command);
