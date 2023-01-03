@@ -1,10 +1,6 @@
 <template>
     <q-page class="q-pa-md">
-        <q-card flat bordered class="my-card">
-            <q-card-section>
-                <q-btn @click="handleCreateNewBtnClick" unelevated color="primary" size="md" label="Create New" />
-            </q-card-section>
-        </q-card>
+        <administration-header @create="createNew" />
 
         <filter-platform
             @search="filterPlatforms"
@@ -53,7 +49,9 @@ import { Platform } from 'src/shared/core/entities/platform.model';
 
 import FilterPlatform from '../components/FilterPlatform.vue';
 import PlatformModal from '../components/PlatformModal.vue';
-import ConfirmationModal from "src/shared/components/modals/confirmation-modal/ConfirmationModal.vue";
+import ConfirmationModal from 'src/shared/components/modals/confirmation-modal/ConfirmationModal.vue';
+import AdministrationHeader from "src/shared/components/administration-header/AdministrationHeader.vue";
+
 import { PlatformFilterForm } from 'src/shared/infrastructure/models/filters/platform-filter.form.model';
 
 const initialPlatform: Platform = {
@@ -62,7 +60,7 @@ const initialPlatform: Platform = {
 }
 
 export default defineComponent({
-    components: { FilterPlatform, PlatformModal, ConfirmationModal },
+    components: { FilterPlatform, PlatformModal, ConfirmationModal, AdministrationHeader },
     setup() {
         const selectedPlatform = reactive<Platform>({
             id: '',
@@ -91,7 +89,7 @@ export default defineComponent({
             platformService.getPlatforms();
         })
 
-        function handleCreateNewBtnClick() {
+        function createNew() {
             showPlatformModal.value = true;
         }
 
@@ -153,7 +151,7 @@ export default defineComponent({
             loading,
             columns,
             initialPagination,
-            handleCreateNewBtnClick,
+            createNew,
             handleUpdateBtnClick,
             handleDeleteBtnClick,
             filterPlatforms,

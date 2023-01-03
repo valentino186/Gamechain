@@ -1,6 +1,6 @@
 <template>
     <form-modal 
-        headerText="Publisher"
+        headerText="Genre"
         @close="close" 
         @save="save"
     >
@@ -11,7 +11,7 @@
 <script lang="ts">
 import { defineComponent, PropType, reactive } from 'vue';
 import { required } from '@vuelidate/validators';
-import { Publisher } from 'src/shared/core/entities/publisher.model';
+import { Genre } from 'src/shared/core/entities/genre.model';
 
 import useVuelidate from '@vuelidate/core';
 
@@ -21,26 +21,26 @@ export default defineComponent({
     components: { FormModal },
     emits: ['close', 'save'],
     props: {
-        publisher: {
-            type: Object as PropType<Publisher>,
+        genre: {
+            type: Object as PropType<Genre>,
             required: true
         }
     },
     setup(props, { emit }) {
-        const publisher = reactive<Publisher>(props.publisher);
+        const genre = reactive<Genre>(props.genre);
 
         const validationRules = {
             name: { required }
         }
 
-        const v$ = useVuelidate(validationRules, publisher);
+        const v$ = useVuelidate(validationRules, genre);
 
         async function save() {
             const isValid = await v$.value.$validate();
 
             if (!isValid) return;
 
-            emit('save', publisher);
+            emit('save', genre);
         }
 
         function close() {
@@ -49,7 +49,7 @@ export default defineComponent({
 
         return {
             v$,
-            publisher,
+            genre,
             save,
             close
         }
