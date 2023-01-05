@@ -1,8 +1,9 @@
 import MainLayout from "layouts/MainLayout.vue";
 import { RouteRecordRaw } from "vue-router";
 import { loginRoutes } from "src/features/login/login.routes";
-import { publisherRoutes } from './../features/publisher/publisher.routes';
+import { genreRoutes } from './../features/genre/genre.routes';
 import { platformRoutes } from './../features/platform/platform.routes';
+import { publisherRoutes } from './../features/publisher/publisher.routes';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -14,8 +15,9 @@ const routes: RouteRecordRaw[] = [
     path: "/",
     component: MainLayout,
     children: [
+      ...genreRoutes,
+      ...platformRoutes,
       ...publisherRoutes,
-      ...platformRoutes
     ],
     meta: {
       requiresAuth: true

@@ -1,9 +1,9 @@
 ﻿using Gamechain.Application.Interfaces.Repositories.Common;
-using Gamechain.Domain.Entities.Aggregates.Platform;
+using Gamechain.Domain.Entities.Aggregates.Genre;
 
 namespace Gamechain.Application.Interfaces.Repositories
 {
-    public interface IPlatformRepository : IRepository<Platform>
+    public interface IGenreRepository : IRepository<Genre>
     {
     }
 }

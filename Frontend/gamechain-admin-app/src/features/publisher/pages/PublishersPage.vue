@@ -1,10 +1,6 @@
 <template>
     <q-page class="q-pa-md">
-        <q-card flat bordered class="my-card">
-            <q-card-section>
-                <q-btn @click="handleCreateNewBtnClick" unelevated color="primary" size="md" label="Create New" />
-            </q-card-section>
-        </q-card>
+        <administration-header @create="createNew" />
 
         <filter-publisher 
             @search="filterPublishers"
@@ -55,6 +51,7 @@ import { PublisherFilterForm } from "src/shared/infrastructure/models/filters/pu
 import PublisherModal from "../components/PublisherModal.vue";
 import FilterPublisher from "../components/FilterPublisher.vue";
 import ConfirmationModal from "src/shared/components/modals/confirmation-modal/ConfirmationModal.vue";
+import AdministrationHeader from "src/shared/components/administration-header/AdministrationHeader.vue";
 
 const initialPublisher: Publisher = {
     id: '',
@@ -62,7 +59,7 @@ const initialPublisher: Publisher = {
 }
 
 export default defineComponent({
-    components: { PublisherModal, ConfirmationModal, FilterPublisher },
+    components: { PublisherModal, ConfirmationModal, FilterPublisher, AdministrationHeader },
     setup() {
         const selectedPublisher = reactive<Publisher>({
             id: '',
@@ -92,7 +89,7 @@ export default defineComponent({
             publisherService.getPublishers();
         })
 
-        function handleCreateNewBtnClick() {
+        function createNew() {
             showPublisherModal.value = true;
         }
 
@@ -151,7 +148,7 @@ export default defineComponent({
             loading,
             publishers,
             initialPagination,
-            handleCreateNewBtnClick,
+            createNew,
             handleUpdateBtnClick,
             handleDeleteBtnClick,
             showConfirmationModal,

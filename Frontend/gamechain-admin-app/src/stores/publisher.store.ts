@@ -40,7 +40,7 @@ export const usePublisherStore = defineStore('publishers', () => {
 
     function updatePublisher(publisher: Publisher) {
         const publisherIndex = state.publishers.findIndex(x => x.id === publisher.id);
-        state.publishers[publisherIndex] = { ...publisher };
+        state.publishers[publisherIndex] = publisher ;
     }
 
     function deletePublisher(publisherId: string) {

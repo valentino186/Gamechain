@@ -15,5 +15,10 @@ namespace Gamechain.Domain.Entities.Aggregates.Genre
         {
             Id = id;
         }
+
+        public void SetName(string name)
+        {
+            Name = name;
+        }
     }
 }

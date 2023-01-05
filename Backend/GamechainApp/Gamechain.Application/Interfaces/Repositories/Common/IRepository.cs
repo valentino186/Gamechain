@@ -1,6 +1,6 @@
 ﻿using Gamechain.Domain.Entities.Common;
 
-namespace Gamechain.Application.Interfaces.Repositories
+namespace Gamechain.Application.Interfaces.Repositories.Common
 {
     public interface IRepository<T> where T : AggregateRoot
     {

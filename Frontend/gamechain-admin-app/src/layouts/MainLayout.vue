@@ -15,6 +15,14 @@
       side="left"
       bordered
     >
+      <q-item to="/genres" class="text-white" clickable>
+        <q-item-section avatar>
+          <q-icon name="category" />
+        </q-item-section>
+
+        <q-item-section>Genres</q-item-section>
+      </q-item>
+
       <q-item to="/platforms" class="text-white" clickable>
         <q-item-section avatar>
           <q-icon name="sports_esports" />
@@ -23,7 +31,7 @@
         <q-item-section>Platforms</q-item-section>
       </q-item>
 
-      <q-item to="/publishers" class="text-white" clickable >
+      <q-item to="/publishers" class="text-white" clickable>
         <q-item-section avatar>
           <q-icon name="groups_2" />
         </q-item-section>

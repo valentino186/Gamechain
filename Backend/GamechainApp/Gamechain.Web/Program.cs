@@ -1,8 +1,10 @@
 using Gamechain.Application;
 using Gamechain.Application.Interfaces.Repositories;
+using Gamechain.Application.Interfaces.Repositories.Common;
 using Gamechain.Domain.Entities.Aggregates.User;
 using Gamechain.Infrastructure.EntityFrameworkCore.Context;
 using Gamechain.Infrastructure.Repositories;
+using Gamechain.Infrastructure.Repositories.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -53,6 +55,7 @@ builder.Services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient<IAuthRepository, AuthRepository>();
 builder.Services.AddTransient<IPublisherRepository, PublisherRepository>();
 builder.Services.AddTransient<IPlatformRepository, PlatformRepository>();
+builder.Services.AddTransient<IGenreRepository, GenreRepository>();
 
 var app = builder.Build();
 

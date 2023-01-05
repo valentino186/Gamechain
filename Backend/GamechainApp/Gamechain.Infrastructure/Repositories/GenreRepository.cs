@@ -1,13 +1,13 @@
 ﻿using Gamechain.Application.Interfaces.Repositories;
-using Gamechain.Domain.Entities.Aggregates.Publisher;
+using Gamechain.Domain.Entities.Aggregates.Genre;
 using Gamechain.Infrastructure.EntityFrameworkCore.Context;
 using Gamechain.Infrastructure.Repositories.Common;
 
 namespace Gamechain.Infrastructure.Repositories
 {
-    public class PublisherRepository : BaseRepository<Publisher>, IPublisherRepository
+    public class GenreRepository : BaseRepository<Genre>, IGenreRepository
     {
-        public PublisherRepository(GamechainDbContext context) : base(context)
+        public GenreRepository(GamechainDbContext context) : base(context)
         {
         }
     }
