@@ -61,9 +61,28 @@ export const useGenreService = () => {
         }
     }
 
+    async function deleteGenre(genreId: string) {
+        try {
+            genreStore.setLoading(true);
+
+            await genreProxy.deleteGenre(genreId);
+
+            genreStore.deleteGenre(genreId);
+
+            notify.success('Genre deleted successfully!');
+        }
+        catch {
+            notify.negative('An error has occured while trying to delete Genre');
+        }
+        finally {
+            genreStore.setLoading(false);
+        }
+    }
+
     return {
         getGenres,
         createGenre,
-        updateGenre
+        updateGenre,
+        deleteGenre
     }
 }

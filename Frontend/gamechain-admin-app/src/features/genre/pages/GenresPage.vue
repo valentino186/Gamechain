@@ -2,6 +2,11 @@
     <q-page class="q-pa-md">
         <administration-header @create="createNew" />
 
+        <filter-genre
+            @search="filterGenres"
+            class="q-mt-md">
+        </filter-genre>
+
         <q-table
             class="q-mt-md"
             title="Genres"
@@ -26,18 +31,28 @@
             @save="saveGenre"
             @close="closeGenreModal">
         </genre-modal>
+
+        <confirmation-modal
+            v-if="showConfirmationModal"
+            :displayMessage="`Are you sure you want to delete '${selectedGenre.name}'?`"
+            @ok="deleteGenre"
+            @cancel="closeConfirmationModal">
+        </confirmation-modal>
     </q-page>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, reactive, ref } from 'vue';
 import { Genre } from 'src/shared/core/entities/genre.model';
+import { GenreFilterForm } from 'src/shared/infrastructure/models/filters/genre-filter-form.model';
 
 import { useGenreService } from 'src/shared/core/services/genre.service';
 import { useGenreStore } from 'src/stores/genre.store';
 
 import AdministrationHeader from 'src/shared/components/administration-header/AdministrationHeader.vue';
+import ConfirmationModal from 'src/shared/components/modals/confirmation-modal/ConfirmationModal.vue';
 import GenreModal from '../components/GenreModal.vue';
+import FilterGenre from '../components/FilterGenre.vue';
 
 const initialGenre: Genre = {
     id: '',
@@ -45,7 +60,7 @@ const initialGenre: Genre = {
 }
 
 export default defineComponent({
-    components: { AdministrationHeader, GenreModal },
+    components: { AdministrationHeader, ConfirmationModal, GenreModal, FilterGenre },
     setup() {
         const selectedGenre = reactive<Genre>({
             id: '',
@@ -53,11 +68,12 @@ export default defineComponent({
         });
 
         const showGenreModal = ref<boolean>(false);
+        const showConfirmationModal = ref<boolean>(false);
 
         const genreService = useGenreService();
         const genreStore = useGenreStore();
 
-        const genres = computed(() => genreStore.state.genres);
+        const genres = computed(() => genreStore.getGenres());
         const loading = computed(() => genreStore.state.loading);
 
         const columns = [
@@ -70,8 +86,8 @@ export default defineComponent({
         }
 
         onMounted(() => {
-            genreService.getGenres();
             setSelectedGenre(initialGenre);
+            genreService.getGenres();
         })
 
         function createNew() {
@@ -95,13 +111,32 @@ export default defineComponent({
             genreService.updateGenre(genre);
         }
 
+        function filterGenres(genreFilterForm: GenreFilterForm) {
+            genreStore.setFilters(genreFilterForm);
+        }
+
         function handleUpdateBtnClick(genre: Genre) {
             setSelectedGenre(genre);
             showGenreModal.value = true;
         }
 
+        function handleDeleteBtnClick(genre: Genre) {
+            setSelectedGenre(genre);
+            showConfirmationModal.value = true;
+        }
+
         function closeGenreModal() {
             showGenreModal.value = false;
+            setSelectedGenre(initialGenre);
+        }
+
+        function deleteGenre() {
+            genreService.deleteGenre(selectedGenre.id);
+            closeConfirmationModal();
+        }
+
+        function closeConfirmationModal() {
+            showConfirmationModal.value = false;
             setSelectedGenre(initialGenre);
         }
 
@@ -112,14 +147,19 @@ export default defineComponent({
         return {
             selectedGenre,
             showGenreModal,
+            showConfirmationModal,
             genres,
             loading,
             columns,
             initialPagination,
             createNew,
             saveGenre,
+            filterGenres,
             handleUpdateBtnClick,
-            closeGenreModal
+            handleDeleteBtnClick,
+            closeGenreModal,
+            deleteGenre,
+            closeConfirmationModal
         }
     }
 })

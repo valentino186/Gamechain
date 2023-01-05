@@ -18,9 +18,14 @@ export const useGenreProxy = () => {
         return authGamechainApi.put<GenreResponse>(url, updateGenreCommand);
     }
 
+    function deleteGenre(genreId: string) {
+        return authGamechainApi.delete(`${url}/${genreId}`);
+    }
+
     return {
         getGenres,
         createGenre,
-        updateGenre
+        updateGenre,
+        deleteGenre
     }
 }
