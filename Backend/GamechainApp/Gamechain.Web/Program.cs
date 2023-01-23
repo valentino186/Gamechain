@@ -56,6 +56,7 @@ builder.Services.AddTransient<IAuthRepository, AuthRepository>();
 builder.Services.AddTransient<IPublisherRepository, PublisherRepository>();
 builder.Services.AddTransient<IPlatformRepository, PlatformRepository>();
 builder.Services.AddTransient<IGenreRepository, GenreRepository>();
+builder.Services.AddTransient<IFeatureRepository, FeatureRepository>();
 
 var app = builder.Build();
 

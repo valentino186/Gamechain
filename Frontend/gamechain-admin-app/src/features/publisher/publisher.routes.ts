@@ -3,7 +3,7 @@ import { RouteRecordRaw } from "vue-router";
 
 export const publisherRoutes: RouteRecordRaw[] = [
     {
-        path: "publishers",
+        path: "/publishers",
         component: PublishersPage
     }
 ]

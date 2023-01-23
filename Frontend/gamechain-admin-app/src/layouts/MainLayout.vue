@@ -15,6 +15,14 @@
       side="left"
       bordered
     >
+      <q-item to="/features" class="text-white" clickable>
+        <q-item-section avatar>
+          <q-icon name="featured_play_list" />
+        </q-item-section>
+
+        <q-item-section>Features</q-item-section>
+      </q-item>
+
       <q-item to="/genres" class="text-white" clickable>
         <q-item-section avatar>
           <q-icon name="category" />
