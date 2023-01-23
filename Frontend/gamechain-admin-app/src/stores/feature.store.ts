@@ -1,3 +1,4 @@
+import { FeatureFilterForm } from './../shared/infrastructure/models/filters/feature-filter-form.model';
 import { Feature } from './../shared/core/entities/feature.model';
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
@@ -5,16 +6,20 @@ import { reactive } from 'vue';
 interface FeatureState {
     features: Feature[];
     loading: boolean;
+    filters: FeatureFilterForm
 }
 
 export const useFeatureStore = defineStore('features', () => {
     const state = reactive<FeatureState>({
         features: [],
-        loading: false
+        loading: false,
+        filters: {
+            name: ''
+        }
     });
 
     function getFeatures() {
-        return state.features;
+        return state.features.filter(x => x.name.toLowerCase().includes(state.filters.name.toLowerCase()));
     }
 
     function setFeatures(features: Feature[]) {
@@ -23,6 +28,10 @@ export const useFeatureStore = defineStore('features', () => {
 
     function setLoading(status: boolean) {
         state.loading = status;
+    }
+
+    function setFilters(featureFilterForm: FeatureFilterForm) {
+        Object.assign(state.filters, featureFilterForm);
     }
 
     function createFeature(feature: Feature) {
@@ -43,6 +52,7 @@ export const useFeatureStore = defineStore('features', () => {
         getFeatures,
         setFeatures,
         setLoading,
+        setFilters,
         createFeature,
         updateFeature,
         deleteFeature
