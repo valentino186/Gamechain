@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Gamechain.Application.Common.Responses;
-using Gamechain.Application.Services.Publishers.Commands.CreatePublisher;
-using Gamechain.Application.Services.Publishers.Commands.UpdatePublisher;
 using Gamechain.Domain.Entities.Aggregates.Publisher;
 
 namespace Gamechain.Application.Profiles
@@ -11,8 +9,6 @@ namespace Gamechain.Application.Profiles
         public PublisherProfile()
         {
             CreateMap<Publisher, PublisherResponse>();
-            CreateMap<CreatePublisherCommand, Publisher>();
-            CreateMap<UpdatePublisherCommand, Publisher>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Gamechain.Domain.Entities.Common;
+using Gamechain.Domain.Exceptions;
 
 namespace Gamechain.Domain.Entities.Aggregates.Feature
 {
@@ -18,6 +19,11 @@ namespace Gamechain.Domain.Entities.Aggregates.Feature
 
         public void SetName(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new CheckPropertyException(nameof(Name));
+            }
+
             Name = name;
         }
     }

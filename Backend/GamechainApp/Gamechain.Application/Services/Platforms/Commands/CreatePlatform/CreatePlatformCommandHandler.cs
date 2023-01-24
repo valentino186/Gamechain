@@ -19,7 +19,7 @@ namespace Gamechain.Application.Services.Platforms.Commands.CreatePlatform
 
         public async Task<PlatformResponse> Handle(CreatePlatformCommand command, CancellationToken cancellationToken)
         {
-            var platform = _mapper.Map<Platform>(command);
+            var platform = new Platform(command.Name);
 
             await _platformRepository.Create(platform);
 

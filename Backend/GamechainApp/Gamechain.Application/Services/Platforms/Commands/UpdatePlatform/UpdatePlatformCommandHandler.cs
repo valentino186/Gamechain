@@ -27,7 +27,7 @@ namespace Gamechain.Application.Services.Platforms.Commands.UpdatePlatform
                 throw new EntityNotFoundException(typeof(Platform));
             }
 
-            _mapper.Map(command, platform);
+            platform.SetName(command.Name);
 
             await _platformRepository.Update(platform);
 

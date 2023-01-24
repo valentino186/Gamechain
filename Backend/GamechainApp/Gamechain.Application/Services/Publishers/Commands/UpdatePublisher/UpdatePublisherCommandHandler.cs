@@ -27,7 +27,7 @@ namespace Gamechain.Application.Services.Publishers.Commands.UpdatePublisher
                 throw new EntityNotFoundException(typeof(Publisher));
             }
 
-            _mapper.Map(command, publisher);
+            publisher.SetName(command.Name);
 
             await _publisherRepository.Update(publisher);
 
