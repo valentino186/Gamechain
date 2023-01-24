@@ -49,7 +49,6 @@ export default defineComponent({
 
         return {
             v$,
-            publisher,
             save,
             close
         }

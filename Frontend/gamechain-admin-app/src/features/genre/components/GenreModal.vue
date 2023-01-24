@@ -49,7 +49,6 @@ export default defineComponent({
 
         return {
             v$,
-            genre,
             save,
             close
         }

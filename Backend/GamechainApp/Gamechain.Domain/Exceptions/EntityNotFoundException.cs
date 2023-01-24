@@ -2,7 +2,9 @@
 {
     public class EntityNotFoundException : Exception
     {
-        public EntityNotFoundException(Type entityType) : base($"{entityType.Name} not found.")
+        private const string ExceptionCode = "App:0001";
+
+        public EntityNotFoundException(Type entityType) : base($"{ExceptionCode} - {entityType.Name} not found.")
         {
         }
     }

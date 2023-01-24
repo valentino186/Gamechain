@@ -47,7 +47,6 @@ export default defineComponent({
 
         return {
             v$,
-            platform,
             save,
             close
         }
