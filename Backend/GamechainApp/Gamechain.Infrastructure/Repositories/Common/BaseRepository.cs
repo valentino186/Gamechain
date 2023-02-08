@@ -8,7 +8,7 @@ namespace Gamechain.Infrastructure.Repositories.Common
     public class BaseRepository<T> : IRepository<T> where T : AggregateRoot
     {
         private readonly GamechainDbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DbSet<T> _dbSet;
 
         public BaseRepository(GamechainDbContext context)
         {

@@ -2,6 +2,7 @@
 using Gamechain.Application.Services.Publishers.Commands.CreatePublisher;
 using Gamechain.Application.Services.Publishers.Commands.DeletePublisher;
 using Gamechain.Application.Services.Publishers.Commands.UpdatePublisher;
+using Gamechain.Application.Services.Publishers.Queries.GetPublisher;
 using Gamechain.Application.Services.Publishers.Queries.GetPublishers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,14 @@ namespace Gamechain.Web.Controllers
         public Task<List<PublisherResponse>> GetPublishers()
         {
             return _mediator.Send(new GetPublishersQuery());
+        }
+
+        [HttpGet("{publisherId}")]
+        public Task<PublisherResponse> GetPublisherById(Guid publisherId)
+        {
+            var query = new GetPublisherQuery(publisherId);
+
+            return _mediator.Send(query);
         }
 
         [HttpPost]

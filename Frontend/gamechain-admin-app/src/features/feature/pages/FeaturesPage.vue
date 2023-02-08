@@ -9,7 +9,7 @@
 
         <q-table
             class="q-mt-md"
-            title="Genres"
+            title="Features"
             :columns="columns"
             :rows="features"
             :loading="loading"

@@ -5,6 +5,7 @@ import { PublisherFilterForm } from 'src/shared/infrastructure/models/filters/pu
 
 interface PublisherState {
     publishers: Publisher[];
+    publisher: Publisher | undefined;
     loading: boolean;
     filters: PublisherFilterForm;
 }
@@ -12,6 +13,7 @@ interface PublisherState {
 export const usePublisherStore = defineStore('publishers', () => {
     const state = reactive<PublisherState>({
         publishers: [],
+        publisher: undefined,
         loading: false,
         filters: {
             name: ''
@@ -28,6 +30,10 @@ export const usePublisherStore = defineStore('publishers', () => {
     
     function setPublishers(publishers: Publisher[]) {
         state.publishers = publishers;
+    }
+
+    function setPublisher(publisher: Publisher) {
+        state.publisher = publisher;
     }
 
     function setFilters(publisherFilterForm: PublisherFilterForm) {
@@ -52,6 +58,7 @@ export const usePublisherStore = defineStore('publishers', () => {
         getPublishers,
         setLoading,
         setPublishers,
+        setPublisher,
         createPublisher,
         updatePublisher,
         deletePublisher,

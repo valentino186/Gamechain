@@ -10,6 +10,10 @@ export const usePublisherProxy = () => {
         return authGamechainApi.get<PublisherResponse[]>(url);
     }
 
+    function getPublisherById(publisherId: string) {
+        return authGamechainApi.get<PublisherResponse>(`${url}/${publisherId}`);
+    }
+
     function createPublisher(createPublisherCommand: CreatePublisherCommand) {
         return authGamechainApi.post<PublisherResponse>(url, createPublisherCommand);
     }
@@ -24,6 +28,7 @@ export const usePublisherProxy = () => {
 
     return {
         getPublishers,
+        getPublisherById,
         createPublisher,
         updatePublisher,
         deletePublisher

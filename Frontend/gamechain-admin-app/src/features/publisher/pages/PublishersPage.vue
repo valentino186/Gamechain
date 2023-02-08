@@ -19,8 +19,9 @@
         >
             <template #body-cell-actions="props">
                 <q-td auto-width key="actions" :props="props">
-                    <q-btn class="q-mr-sm" unelevated round color="deep-orange" icon="edit" size="sm" @click="handleUpdateBtnClick(props.row)" />
-                    <q-btn unelevated round color="negative" icon="delete" size="sm" @click="handleDeleteBtnClick(props.row)" />
+                    <q-btn class="q-mr-sm" title="Edit" unelevated round color="deep-orange" icon="edit" size="sm" @click="handleUpdateBtnClick(props.row)" />
+                    <q-btn class="q-mr-sm" title="Games" unelevated round color="indigo" icon="videogame_asset" size="sm" @click="handleGamesBtnClick(props.row.id)" />
+                    <q-btn unelevated round title="Delete" color="negative" icon="delete" size="sm" @click="handleDeleteBtnClick(props.row)" />
                 </q-td>
             </template>
         </q-table>
@@ -52,6 +53,7 @@ import PublisherModal from "../components/PublisherModal.vue";
 import FilterPublisher from "../components/FilterPublisher.vue";
 import ConfirmationModal from "src/shared/components/modals/confirmation-modal/ConfirmationModal.vue";
 import AdministrationHeader from "src/shared/components/administration-header/AdministrationHeader.vue";
+import { useRouter } from "vue-router";
 
 const initialPublisher: Publisher = {
     id: '',
@@ -71,6 +73,7 @@ export default defineComponent({
 
         const publisherService = usePublisherService();
         const publisherStore = usePublisherStore();
+        const router = useRouter();
 
         const loading = computed(() => publisherStore.state.loading);
         const publishers = computed(() => publisherStore.getPublishers());
@@ -96,6 +99,10 @@ export default defineComponent({
         function handleUpdateBtnClick(publisher: Publisher) {
             Object.assign(selectedPublisher, publisher);
             showPublisherModal.value = true;
+        }
+
+        function handleGamesBtnClick(publisherId: string) {
+            router.push(`/publishers/${publisherId}/games`)
         }
 
         function handleDeleteBtnClick(publisher: Publisher) {
@@ -150,6 +157,7 @@ export default defineComponent({
             initialPagination,
             createNew,
             handleUpdateBtnClick,
+            handleGamesBtnClick,
             handleDeleteBtnClick,
             showConfirmationModal,
             showPublisherModal,

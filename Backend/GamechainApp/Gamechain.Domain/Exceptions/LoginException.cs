@@ -2,7 +2,9 @@
 {
     public class LoginException : Exception
     {
-        public LoginException() : base("Incorrect username or password.")
+        private const string ExceptionCode = "App:0003";
+
+        public LoginException() : base($"{ExceptionCode} - Incorrect username or password.")
         {
         }
     }

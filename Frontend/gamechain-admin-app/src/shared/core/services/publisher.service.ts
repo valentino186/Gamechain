@@ -25,6 +25,22 @@ export const usePublisherService = () => {
         }
     }
 
+    async function getPublisherById(publisherId: string) {
+        try {
+            publisherStore.setLoading(true);
+
+            const response = await publisherProxy.getPublisherById(publisherId);
+
+            publisherStore.setPublisher(response.data);
+        }
+        catch {
+            notify.negative('An error has occured while trying to fetch data.');
+        }
+        finally {
+            publisherStore.setLoading(false);
+        }
+    }
+
     async function createPublisher(createPublisherRequest: CreatePublisherCommand) {
         try {
             publisherStore.setLoading(true);
@@ -81,6 +97,7 @@ export const usePublisherService = () => {
 
     return {
         getPublishers,
+        getPublisherById,
         createPublisher,
         updatePublisher,
         deletePublisher
