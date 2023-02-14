@@ -31,5 +31,20 @@ namespace Gamechain.Domain.Entities.Aggregates.Game
         {
             Id = id;
         }
+
+        public void AddFeature(GameFeature gameFeature)
+        {
+            Features.Add(gameFeature);
+        }
+
+        public void AddGenre(GameGenre gameGenre)
+        {
+            Genres.Add(gameGenre);
+        }
+
+        public void AddPlatform(GamePlatform gamePlatform)
+        {
+            Platforms.Add(gamePlatform);
+        }
     }
 }

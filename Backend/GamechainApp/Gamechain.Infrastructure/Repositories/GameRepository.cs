@@ -14,7 +14,13 @@ namespace Gamechain.Infrastructure.Repositories
 
         public Task<List<Game>> GetPublisherGames(Guid publisherId)
         {
-            return _dbSet.Where(x => x.PublisherId == publisherId).ToListAsync();
+            var games = _dbSet.Where(x => x.PublisherId == publisherId)
+                .Include(x => x.Features)
+                .Include(x => x.Genres)
+                .Include(x => x.Platforms)
+                .ToListAsync();
+
+            return games;
         }
     }
 }

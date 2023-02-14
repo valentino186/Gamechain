@@ -6,5 +6,11 @@ namespace Gamechain.Domain.Entities.Aggregates.Game
     {
         public Guid GameId { get; set; }
         public Guid PlatformId { get; set; }
+
+        public GamePlatform(Guid gameId, Guid platformId)
+        {
+            GameId = gameId;
+            PlatformId = platformId;
+        }
     }
 }

@@ -18,7 +18,6 @@ namespace Gamechain.Application.Services.Features.Commands.UpdateFeature
             _mapper = mapper;
         }
 
-
         public async Task<FeatureResponse> Handle(UpdateFeatureCommand command, CancellationToken cancellationToken)
         {
             var feature = await _featureRepository.GetById(command.Id);

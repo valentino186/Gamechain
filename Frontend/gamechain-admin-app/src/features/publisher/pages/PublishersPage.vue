@@ -20,7 +20,7 @@
             <template #body-cell-actions="props">
                 <q-td auto-width key="actions" :props="props">
                     <q-btn class="q-mr-sm" title="Edit" unelevated round color="deep-orange" icon="edit" size="sm" @click="handleUpdateBtnClick(props.row)" />
-                    <q-btn class="q-mr-sm" title="Games" unelevated round color="indigo" icon="videogame_asset" size="sm" @click="handleGamesBtnClick(props.row.id)" />
+                    <q-btn class="q-mr-sm" title="Games" unelevated round color="primary" icon="videogame_asset" size="sm" @click="handleGamesBtnClick(props.row.id)" />
                     <q-btn unelevated round title="Delete" color="negative" icon="delete" size="sm" @click="handleDeleteBtnClick(props.row)" />
                 </q-td>
             </template>
