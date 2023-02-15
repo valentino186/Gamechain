@@ -1,5 +1,6 @@
 ﻿using Gamechain.Application.Common.Responses;
 using Gamechain.Application.Services.Games.Commands.CreateGame;
+using Gamechain.Application.Services.Games.Commands.UpdateGame;
 using Gamechain.Application.Services.Games.Queries.GetPublisherGames;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,12 @@ namespace Gamechain.Web.Controllers
 
         [HttpPost]
         public Task<GameResponse> CreateGame([FromBody] CreateGameCommand command)
+        {
+            return _mediator.Send(command);
+        }
+
+        [HttpPut]
+        public Task<GameResponse> UpdateGame([FromBody] UpdateGameCommand command)
         {
             return _mediator.Send(command);
         }

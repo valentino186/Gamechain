@@ -6,5 +6,6 @@ namespace Gamechain.Application.Interfaces.Repositories
     public interface IGameRepository : IRepository<Game>
     {
         Task<List<Game>> GetPublisherGames(Guid publisherId);
+        Task<Game?> GetGameWithDetails(Guid gameId);
     }
 }

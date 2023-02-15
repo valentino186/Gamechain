@@ -22,5 +22,16 @@ namespace Gamechain.Infrastructure.Repositories
 
             return games;
         }
+
+        public Task<Game?> GetGameWithDetails(Guid gameId)
+        {
+            var game = _dbSet
+                .Include(x => x.Features)
+                .Include(x => x.Genres)
+                .Include(x => x.Platforms)
+                .FirstOrDefaultAsync(x => x.Id == gameId);
+
+            return game;
+        }
     }
 }
