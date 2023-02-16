@@ -1,5 +1,6 @@
 ﻿using Gamechain.Application.Common.Responses;
 using Gamechain.Application.Services.Games.Commands.CreateGame;
+using Gamechain.Application.Services.Games.Commands.DeleteGame;
 using Gamechain.Application.Services.Games.Commands.UpdateGame;
 using Gamechain.Application.Services.Games.Queries.GetPublisherGames;
 using MediatR;
@@ -36,6 +37,14 @@ namespace Gamechain.Web.Controllers
         [HttpPut]
         public Task<GameResponse> UpdateGame([FromBody] UpdateGameCommand command)
         {
+            return _mediator.Send(command);
+        }
+
+        [HttpDelete("{gameId}")]
+        public Task DeleteGame(Guid gameId)
+        {
+            var command = new DeleteGameCommand(gameId);
+
             return _mediator.Send(command);
         }
     }
